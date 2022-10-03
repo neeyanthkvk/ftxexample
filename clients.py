@@ -5,15 +5,14 @@ from websockets.client import FtxWebsocketClient
 
 api_key = 'API_KEY'
 secret = 'API_SECRET'
+subaccount_name = 'YOUR_SUBACCOUNT_NAME'
 
 def main():
-    rest_client = FtxClient(api_key, secret)
-    websocket_client = FtxWebsocketClient(api_key, secret)
-    websocket_client.connect()
-    while(True):
-        time.sleep(2)
-        print(websocket_client.get_orderbook('BTC/USD'))
-        print(rest_client.get_orderbook('BTC/USD', depth=1))
+    rest_client = FtxClient(api_key, secret, subaccount_name)
+    
+    # a request that actually requires proper login credentials to get
+    print(rest_client.get_account_info())
+
 
 if __name__ == '__main__':
     main()
